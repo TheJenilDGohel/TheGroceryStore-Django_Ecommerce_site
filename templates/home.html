@@ -1,0 +1,69 @@
+{% load static %}
+{% load custom_filter %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>home page</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+</head>
+<body>
+   {% include "header.html" %}
+   <div class="home-bg">
+      <section class="home">
+         <div class="content">
+            <span>Don't panic, go organice</span>
+            <h3>Reach For A Healthier You With Organic Foods</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto natus culpa officia quasi, accusantium explicabo?</p>
+            <a href="#" class="btn">about us</a>
+         </div>
+      </section>
+   </div>
+
+   <section class="home-category">
+      <h1 class="title">shop by category</h1>
+      <div class="box-container">
+         {%for category in categories%}
+         <div class="box">
+            <img src="{{ category.image.url }}" alt="" style="height:196px;">
+            <h3>{{category.name}}</h3>
+            <p style="height: 70px;">{{category.description}}</p>
+            <a href="/?category={{category.category_id}}" class="btn">{{category.name}}</a>
+         </div>
+         {% endfor %}
+      </div>
+   </section>
+
+   <section class="products">
+      <h1 class="title">All Products</h1>
+      <div class="box-container">
+         {% for product in products|slice:"0:6" %}
+      <form action="/#{{product.product_id}}" class="box" id = {{product.product_id}} method="POST">
+         {% csrf_token %}
+         <div class="price">{{product.price|currency}}</div>
+         <img src="{{ product.image.url }}" alt="">
+         <div class="name" style="height:70px;">{{product.name}}</div>
+         <input type="hidden" name="product_id" value="{{product.product_id}}">
+         <input type="hidden" name="p_name" value="{{product.name}}">
+         <input type="hidden" name="p_price" value="{{product.price}}">
+         <input type="hidden" name="p_image" value="{{ product.image.url }}">
+         <input type="number" min="1" value="1" name="p_qty" class="qty">
+         <input type="submit" value="add to wishlist" class="option-btn" name="add_to_wishlist">
+         <input type="submit" value="add to cart" class="btn" name="add_to_cart">
+      </form>
+      {% endfor %}
+      </div>
+   </section>
+
+   {% include "footer.html" %}
+
+<script src="{% static 'js/script1.js'%}"></script>
+</body>
+</html>

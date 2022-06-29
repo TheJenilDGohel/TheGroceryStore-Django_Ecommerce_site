@@ -1,0 +1,52 @@
+{%load static%}
+{% load custom_filter %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>shop</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+
+</head>
+<body>
+   {% include "header.html" %}
+
+<section class="p-category">
+   {% for category in categories %}
+   <a href="/?category={{category.category_id}}">{{category.name}}</a>
+   {% endfor %}
+</section>
+
+<section class="products">
+
+   <h1 class="title">All products</h1>
+   <div class="box-container">
+      {% for product in products%}
+   <form action="/#{{product.product_id}}" class="box" method="POST">
+      {% csrf_token %}
+      <div class="price">{{product.price|currency}}</div>
+      <img src="{{ product.image.url }}" alt="" >
+      <div class="name" style="height:70px;">{{ product.name }}</div> <!--product.name|slice:'255'-->
+      <input type="hidden" name="product_id" value="{{product.product_id}}">
+      <input type="hidden" name="p_name" value="{{product.name}}">
+      <input type="hidden" name="p_price" value="{{product.price}}">
+      <input type="hidden" name="p_image" value="{{ product.image.url }}">
+      <input type="number" min="1" value="1" name="p_qty" class="qty">
+      <input type="submit" value="add to wishlist" class="option-btn" name="add_to_wishlist">
+      <input type="submit" value="add to cart" class="btn" name="add_to_cart">
+   </form>
+   {% endfor %}
+   </div>
+
+</section>
+{% include "footer.html" %}
+<script src="{% static 'js/script1.js'%}"></script>
+</body>
+</html>

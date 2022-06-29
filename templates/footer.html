@@ -1,0 +1,42 @@
+<footer class="footer">
+
+   <section class="box-container">
+
+      <div class="box">
+         <h3>quick links</h3>
+         <a href="{% url 'home' %}"> <i class="fas fa-angle-right"></i> home</a>
+         <a href="{% url 'shop' %}"> <i class="fas fa-angle-right"></i> shop</a>
+         <a href="{% url 'about' %}"> <i class="fas fa-angle-right"></i> about</a>
+         <a href="{% url 'contact' %}"> <i class="fas fa-angle-right"></i> contact</a>
+      </div>
+
+      <div class="box">
+         <h3>extra links</h3>
+         {% if request.session.cart %}
+         <a href="{% url 'cart' %}"> <i class="fas fa-angle-right"></i> cart</a>
+         <a href="{% url 'wishlist' %}"> <i class="fas fa-angle-right"></i> wishlist</a>
+         {% endif %}
+         <a href="{% url 'login' %}"> <i class="fas fa-angle-right"></i> login</a>
+         <a href="{% url 'register' %}"> <i class="fas fa-angle-right"></i> register</a>
+      </div>
+
+      <div class="box">
+         <h3>contact info</h3>
+         <p> <i class="fas fa-phone"></i> +91 6353142343 </p>
+         <p> <i class="fas fa-phone"></i> +91 8733992320 </p>
+         <p> <i class="fas fa-envelope"></i> thgrocerystore@gmail.com </p>
+         <p> <i class="fas fa-map-marker-alt"></i> Ahmedabad, Gujarat, india - 380005 </p>
+      </div>
+
+      <div class="box">
+         <h3>follow us</h3>
+         <a href="https://www.facebook.com/OpTheGroceryStore"> <i class="fab fa-facebook-f"></i> facebook </a>
+         <a href="https://twitter.com/thgrocerystore"> <i class="fab fa-twitter"></i> twitter </a>
+         <a href="https://www.instagram.com/op_the_grocery_store/"> <i class="fab fa-instagram"></i> instagram </a>
+      </div>
+
+   </section>
+
+   <p class="credit"> &copy; copyright @ 2022 by <span>The Grocery Store</span> | all rights reserved! </p>
+
+</footer>

@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>register</title>
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="{% static 'css/components.css' %}">
+   
+   <!-- JavaScript -->
+   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+   <!-- CSS -->
+   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+   <!-- Default theme -->
+   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+</head>
+<body>
+<section class="form-container">
+   <form enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      <h3>register now</h3>
+      <input type="text" name="first_name" class="box" placeholder="First Name" required>
+      <input type="text" name="last_name" class="box" placeholder="Last Name" required>
+      <input type="email" name="email" class="box" placeholder="Email" required>
+      <input type="password" name="pass" class="box" placeholder="Password" required>
+      <input type="password" name="re_pass" class="box" placeholder="Re-Type Password" required>
+      {% comment %} <input type="file" name="image" class="box" required accept="image/jpg, image/jpeg, image/png"> {% endcomment %}
+      <input type="submit" value="register now" class="btn" name="submit">
+      <p>already have an account? <a href="{% url 'login' %}">login now</a></p>
+   </form>
+</section>
+
+<script>
+   {%for flashmsg in messages%}
+   alertify.set('notifier','position', 'top-right');
+   alertify.success("{{flashmsg}}");
+   {%endfor%}
+</script>
+</body>
+</html>

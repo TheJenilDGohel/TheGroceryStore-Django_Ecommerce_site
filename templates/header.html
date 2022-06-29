@@ -1,0 +1,39 @@
+{% load static %}
+<header class="header">
+   <div class="flex">
+      <a href="{% url 'home' %}" class="logo">TheGroceryStore<span>&trade;</span></a>
+      <nav class="navbar">
+         <a href="{% url 'home' %}">Home</a>
+         <a href="{% url 'shop'%}">Shop</a>
+         <a href="{% url 'orders'%}">Orders</a>
+         <a href="{% url 'contact' %}">Contact</a>
+         <a href="{% url 'about' %}">About</a>
+      </nav>
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <a href="{% url 'search' %}" class="fas fa-search"></a>
+
+         
+            {% if request.session.cart %}
+            <a href="{% url 'wishlist'%}"><i class="fas fa-heart"></i><span> ({{request.session.wishlist|length}}) </span></a>
+            <a href="{% url 'cart'%}"><i class="fas fa-shopping-cart"></i><span> ({{request.session.cart|length}})</span></a>
+            {% endif %}
+      </div>
+
+      <div class="profile">
+      {%if request.session.User_id %}
+         <img src="{% static 'images/pic-1.png' %}" alt="">
+         <p>{{request.session.User_username}}</p>
+         <a href="{% url 'userprofile' %}" class="btn">update profile</a>
+         <a href="{% url 'logout'%}" class="delete-btn">logout</a>
+
+       {% else %}
+         <div class="flex-btn">
+            <a href="{% url 'login' %}" class="option-btn">login</a>
+            <a href="{% url 'register' %}" class="option-btn">register</a>
+         </div>
+       {% endif %}
+      </div>
+   </div>
+</header>
