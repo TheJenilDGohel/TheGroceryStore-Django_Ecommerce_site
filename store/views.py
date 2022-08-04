@@ -234,7 +234,7 @@ def checkout(request):
                           product = product,
                           price = product.price,
                           quantity = cart.get(str(product_id)),
-                          address = address,
+                          address = address, 
                           phone = phone)
             print(Order)
             Order.placeOrder()
