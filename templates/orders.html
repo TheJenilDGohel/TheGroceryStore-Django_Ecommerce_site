@@ -116,10 +116,8 @@
     <section class="placed-orders">
 
         <h1 class="title">placed orders</h1>
-
+        {% if request.session.User_username %}
         <div class="box-container">
-
-
             <table class="table-bordered">
                 <thead>
                     <tr>
@@ -133,7 +131,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {%for order in orders %}
+                    {% for order in orders %}
                     <tr>
                         <td>{{ order.product }}</td>
                         <td>{{ order.address }}</td>
@@ -155,14 +153,15 @@
                 </tbody>
             </table>
         </div>
-
-
+        {% else %}
+        <p class="empty"> Please Login To See Your Orders !</p>
+        {% endif %}
 
     </section>
 
     {% include 'footer.html'%}
 
-    <script src="{% static 'js/script.js'%}"></script>
+    <script src="{% static 'js/script1.js'%}"></script>
 
 </body>
 

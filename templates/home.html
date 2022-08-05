@@ -2,6 +2,7 @@
 {% load custom_filter %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,6 +15,7 @@
    <!-- custom css file link  -->
    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
 </head>
+
 <body>
    {% include "header.html" %}
    <div class="home-bg">
@@ -21,7 +23,8 @@
          <div class="content">
             <span>Don't panic, go organice</span>
             <h3>Reach For A Healthier You With Organic Foods</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto natus culpa officia quasi, accusantium explicabo?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto natus culpa officia quasi, accusantium
+               explicabo?</p>
             <a href="#" class="btn">about us</a>
          </div>
       </section>
@@ -45,25 +48,26 @@
       <h1 class="title">All Products</h1>
       <div class="box-container">
          {% for product in products|slice:"0:6" %}
-      <form action="/#{{product.product_id}}" class="box" id = {{product.product_id}} method="POST">
-         {% csrf_token %}
-         <div class="price">{{product.price|currency}}</div>
-         <img src="{{ product.image.url }}" alt="">
-         <div class="name" style="height:70px;">{{product.name}}</div>
-         <input type="hidden" name="product_id" value="{{product.product_id}}">
-         <input type="hidden" name="p_name" value="{{product.name}}">
-         <input type="hidden" name="p_price" value="{{product.price}}">
-         <input type="hidden" name="p_image" value="{{ product.image.url }}">
-         <input type="number" min="1" value="1" name="p_qty" class="qty">
-         <input type="submit" value="add to wishlist" class="option-btn" name="add_to_wishlist">
-         <input type="submit" value="add to cart" class="btn" name="add_to_cart">
-      </form>
-      {% endfor %}
+         <form action="/#{{product.product_id}}" class="box" id={{product.product_id}} method="POST">
+            {% csrf_token %}
+            <div class="price">{{product.price|currency}}</div>
+            <img src="{{ product.image.url }}" alt="">
+            <div class="name" style="height:70px;">{{product.name}}</div>
+            <input type="hidden" name="product_id" value="{{product.product_id}}">
+            <input type="hidden" name="p_name" value="{{product.name}}">
+            <input type="hidden" name="p_price" value="{{product.price}}">
+            <input type="hidden" name="p_image" value="{{ product.image.url }}">
+            <input type="number" min="1" value="1" name="p_qty" class="qty">
+            <input type="submit" value="add to wishlist" class="option-btn" name="add_to_wishlist">
+            <input type="submit" value="add to cart" class="btn" name="add_to_cart">
+         </form>
+         {% endfor %}
       </div>
    </section>
 
    {% include "footer.html" %}
 
-<script src="{% static 'js/script1.js'%}"></script>
+   <script src="{% static 'js/script1.js'%}"></script>
 </body>
+
 </html>
