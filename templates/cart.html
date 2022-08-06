@@ -3,6 +3,7 @@
 {% load custom_filter %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,51 +17,48 @@
    <link rel="stylesheet" href="{%static 'css/style1.css'%}">
 
 </head>
+
 <body>
-   
-{% include 'header.html' %} 
 
-<section class="shopping-cart">
+   {% include 'header.html' %}
 
-   <h1 class="title">products added</h1>
+   <section class="shopping-cart">
 
-   <div class="box-container">
+      <h1 class="title">products added</h1>
 
-      {% for product in products %}
-   <form action="" method="POST" class="box">
-      {% csrf_token %}
-      <a href="cart.php?delete=<?= $fetch_cart['id']; ?>" class="fas fa-times" onclick="return confirm('delete this from cart?');"></a>
-      <a href="view_page.php?pid=<?= $fetch_cart['pid']; ?>" class="fas fa-eye"></a>
-      <img src="{{product.image.url}}" alt="">
-      <div class="name">{{product.name}}</div>
-      <div class="price">{{product.price|currency}}</div>
-      <input type="hidden" name="cart_id" value="">
-      <div class="flex-btn">
-         <input type="number" min="1" value="{{product|cart_quantity:request.session.cart}}" class="qty" name="p_qty">
-         <input type="submit" value="update" name="update_qty" class="option-btn">
+      <div class="box-container">
+
+         {% for product in products %}
+         <form action="" method="POST" class="box">
+            {% csrf_token %}
+            <a href="cart.php?delete=<?= $fetch_cart['id']; ?>" class="fas fa-times"
+               onclick="return confirm('delete this from cart?');"></a>
+            <a href="view_page.php?pid=<?= $fetch_cart['pid']; ?>" class="fas fa-eye"></a>
+            <img src="{{product.image.url}}" alt="">
+            <div class="name">{{product.name}}</div>
+            <div class="price">{{product.price|currency}}</div>
+            <input type="hidden" name="cart_id" value="">
+            <div class="flex-btn">
+               <input type="number" min="1" value="{{product|cart_quantity:request.session.cart}}" class="qty"
+                  name="p_qty">
+               <input type="submit" value="update" name="update_qty" class="option-btn">
+            </div>
+            <div class="sub-total"> sub total : <span>{{product|price_total:request.session.cart|currency}}</span>
+            </div>
+         </form>
+         {% endfor %}
+
       </div>
-      <div class="sub-total"> sub total : <span>{{product|price_total:request.session.cart|currency}}</span> </div>
-   </form>
-   {% endfor %}
-   
-   <!-- <?php
-      $grand_total += $sub_total;
-      }
-   }else{
-      echo '<p class="empty">your cart is empty</p>';
-   }
-   ?> -->
-   </div>
 
-   <div class="cart-total">
-      <p>grand total : {{products|total_cart_price:request.session.cart|currency}}<span></span></p>
-      <a href="{% url 'shop' %}" class="option-btn">continue shopping</a>
-      <a href="{% url 'clear_cart' %}" class="delete-btn <?= ($grand_total > 1)?'':'disabled'; ?>">delete all</a>
-      <a href="{% url 'checkout'%}"  class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">proceed to checkout</a>
-   </div>
-   
+      <div class="cart-total">
+         <p>grand total : {{products|total_cart_price:request.session.cart|currency}}<span></span></p>
+         <a href="{% url 'shop' %}" class="option-btn">continue shopping</a>
+         <a href="{% url 'clear_cart' %}" class="delete-btn <?= ($grand_total > 1)?'':'disabled'; ?>">delete all</a>
+         <a href="{% url 'checkout'%}" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">proceed to checkout</a>
+      </div>
 
-</section>
+
+   </section>
 
 
 
@@ -69,9 +67,10 @@
 
 
 
-<?php include 'footer.php'; ?>
+   <?php include 'footer.php'; ?>
 
-<script src="{% static 'js/script1.js' %}"></script>
+   <script src="{% static 'js/script1.js' %}"></script>
 
 </body>
+
 </html>

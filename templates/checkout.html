@@ -3,6 +3,7 @@
 {% load custom_filter %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,50 +17,48 @@
    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
 
 </head>
+
 <body>
-   
-{% include 'header.html' %}
 
-<section class="display-orders">
-   {% if product in products %}
-   <div class="grand-total">grand total : <span> {{products|total_cart_price:request.session.cart|currency}}</span></div>
-   {% else %}
-   <div class="grand-total">grand total : <span> {{products|total_cart_price:request.session.cart|currency}}</span></div>
-   {% endif %}
-</section>
+   {% include 'header.html' %}
 
-<section class="checkout-orders">
-   <form action="{% url 'checkout' %}" method="POST">
-      {% csrf_token %}
-      <h3>place your order</h3>
-      <div class="flex">
-         <div class="inputBox">
-            <span>your name :</span>
-            <input type="text" name="name" placeholder="enter your name" class="box" required>
-         </div>
-         <div class="inputBox">
-            <span>your number :</span>
-            <input type="number" name="number" placeholder="enter your number" class="box" required>
-         </div>
-         <div class="inputBox">
-            <span>your email :</span>
-            <input type="email" name="email" placeholder="enter your email" class="box" required>
-         </div>
-         <div class="inputBox">
-            <span>payment method :</span>
-            <select name="method" class="box" required>
-               <option value="cash on delivery">cash on delivery</option>
-            </select>
-         </div>
-         <div class="inputBox">
-            <span>Address :</span>
-            <input type="text" name="address" placeholder="Enter Your Address" class="box" required>
-         </div>
-      <input type="submit" name="order" class="btn <?= ($cart_grand_total > 1)?'':'disabled'; ?>" value="place order">
-   </form>
-</section>
-{% include 'footer.html' %}
-<script src="{% static 'js/script1.js' %}"></script>
+   <section class="display-orders">
+   </section>
+
+   <section class="checkout-orders">
+      <form action="{% url 'checkout' %}" method="POST">
+         {% csrf_token %}
+         <h3>place your order</h3>
+         <div class="flex">
+            <div class="inputBox">
+               <span>your name :</span>
+               <input type="text" name="name" placeholder="enter your name" class="box" required>
+            </div>
+            <div class="inputBox">
+               <span>your number :</span>
+               <input type="number" name="number" placeholder="enter your number" class="box" required>
+            </div>
+            <div class="inputBox">
+               <span>your email :</span>
+               <input type="email" name="email" placeholder="enter your email" class="box" required>
+            </div>
+            <div class="inputBox">
+               <span>payment method :</span>
+               <select name="method" class="box" required>
+                  <option value="cash on delivery">cash on delivery</option>
+               </select>
+            </div>
+            <div class="inputBox">
+               <span>Address :</span>
+               <input type="text" name="address" placeholder="Enter Your Address" class="box" required>
+            </div>
+            <input type="submit" name="order" class="btn <?= ($cart_grand_total > 1)?'':'disabled'; ?>"
+               value="place order">
+      </form>
+   </section>
+   {% include 'footer.html' %}
+   <script src="{% static 'js/script1.js' %}"></script>
 
 </body>
+
 </html>

@@ -115,17 +115,6 @@ if(isset($_POST['add_to_cart'])){
 <section class="products" style="padding-top: 0; min-height:100vh;">
 
    <div class="box-container">
-
-   {% comment %} <?php
-      if(isset($_POST['search_btn'])){
-      $search_box = $_POST['search_box'];
-      $search_box = filter_var($search_box, FILTER_SANITIZE_STRING);
-      $select_products = $conn->prepare("SELECT * FROM `products` WHERE name LIKE '%{$search_box}%' OR category LIKE '%{$search_box}%'");
-      $select_products->execute();
-      if($select_products->rowCount() > 0){
-         while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){ 
-   ?> {% endcomment %}
-
    {% for product in products %}
    <form action="/#{{product.product_id}}" class="box" id = {{product.product_id}} method="POST">
       {% csrf_token %}
